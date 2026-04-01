@@ -26,10 +26,16 @@
     "test": "test"
   },
   "scripts": {
-    "test": "node run-tests.js"
+    "test": "node run-tests.js",
+    "build:wasm": "make",
+    "build:js": "node scripts/combine.js",
+    "build": "npm run build:wasm && npm run build:js",
+    "clean": "make clean",
+    "clean:all": "make clean-libs"
   },
   "type": "commonjs",
   "devDependencies": {
-    "puppeteer": "^24.37.5"
+    "puppeteer": "^24.37.5",
+    "terser": "^5.31.0"
   }
 }

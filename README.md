@@ -99,8 +99,6 @@ standards-compliant XSLT 1.0 engine.
 Note that as of now, there are a few things that don't work perfectly:
  - You'll need to be running the polyfill in a browser with the native XSLT
    feature disabled. In Chrome, you can do this at `chrome://flags/#xslt`.
- - The output of the transformation is assumed to be HTML in a few places.
-   If the output is something else, like text or XML, things will likely break.
  - The `parseAndReplaceCurrentXMLDoc()` function will replace the contents of
    the *current* document (an `XHTML` document) with the transformed content.
    Because XHTML always renders in no-quirks mode, if the transformed (HTML)
@@ -160,21 +158,20 @@ $ git clone --recursive https://github.com/mfreed7/xslt_polyfill.git
 
 The build assumes several tools such as `emscripten` and `make`.
 
-The package mangler/compressor `terser` is also assumed. If you don't have it installed, you can
-install it via npm:
+The package mangler/compressor `terser` is managed locally via npm:
 ```shell
-npm install terser -g
+npm install
 ```
 
 ### Building
-Given the dependencies listed above, the polyfill can be built with one command:
+Given the dependencies listed above, you must first install the npm dependencies:
 ```shell
-./build.sh
+npm install
 ```
 
-Once native code is built, you can change js code and re-run only last step, which is the JS minification step with:
+Then, the polyfill can be built with one command:
 ```shell
-./combine_and_minify.sh
+npm run build
 ```
 
 This will produce `xslt-polyfill.min.js`, which is the minified polyfill
